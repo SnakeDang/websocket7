@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Client</title>
+</head>
+<body>
+    <div>
+        <h1>WebSocket Client</h1>
+        <input type="text" id="inputValue" placeholder="send message to websocket">
+        <br/>
+        <br>
+        <button onclick="sendMessage()">Connect WebSocket</button>
+    </div>
+
+    <script>
+        let socket;
+        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImMwMjZiYzhiLThlZTAtNDVlZS1hNzRmLWRkMmUzMGU4NDIyOCIsInJvbGUiOiJBZG1pbmlzdHJhdG9yIiwibmJmIjoxNzAzNjkzODQzLCJleHAiOjE3MDQyOTg2NDMsImlhdCI6MTcwMzY5Mzg0MywiaXNzIjoiY29yZS5jb20iLCJhdWQiOiJjb3JlLmNvbSJ9.ehC_TgNhF90pgkWW_vHOCvgtoFioye_FRsMuhtbu6j0"
+        let valueInput = document.getElementById("inputValue")
+            // Thay đổi địa chỉ và cổng WebSocket server theo đúng cấu hình của bạn
+            socket = new WebSocket(`ws://localhost:5042/ocpp1`);
+
+            socket.onopen = function (event) {
+                console.log("WebSocket connection opened:", event);
+               
+            };
+
+            socket.onmessage = function (event) {
+                console.log("WebSocket message received:", event.data);
+            };
+
+            socket.onclose = function (event) {
+                console.log("WebSocket connection closed:", event);
+            };
+     
+        
+        function sendMessage() {
+            if (socket && socket.readyState === WebSocket.OPEN) {
+                console.log("Sending message:", valueInput.value);
+                
+                socket.send(valueInput.value);
+                valueInput.value = ''
+            }else
+            console.log("fail to send")
+        }
+    </script>
+</body>
+</html>

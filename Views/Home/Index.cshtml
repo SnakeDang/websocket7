@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "Home";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>PageTest message OCPP send.</p>
+ <input type="text" id="inputValue" placeholder="send message to websocket">
+        <br/>
+        <br>
+        <button onclick="sendMessage()">Connect WebSocket</button>
+
+<div >Message send</div>
+
+<div >
+
+    <span id="messageSended" style="color: red;"></span>
+</div>
+
+<script src="~/js/private.js"></script>
