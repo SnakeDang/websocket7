@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using WebsocketNet7.Models;
-
+using static Procedure.ProcedureHandler;
 namespace WebsocketNet7.Controllers;
 
 public class HomeController : Controller
@@ -15,7 +16,9 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+         List<string> rooms = GetRoom();
+         SelectList selectRooms = new SelectList(rooms);
+        return View(selectRooms);
     }
 
     public IActionResult Privacy()

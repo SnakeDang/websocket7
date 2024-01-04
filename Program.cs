@@ -1,17 +1,17 @@
 using System.Net.WebSockets;
 using System.Text;
 using Constant;
-
+using static Procedure.ProcedureHandler;
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the container.5
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 app.UseWebSockets();
 app.Use(async (context, next) =>
 {
-    if (context.Request.Path == "/ocpp" || context.Request.Path == "/ocpp1"  )
+    if (GetRoom().Contains(context.Request.Path) )
     {
         if (context.WebSockets.IsWebSocketRequest)
         {

@@ -2,9 +2,11 @@
 @{
     ViewData["Title"] = "Home";
 }
+@model SelectList
 <h1>@ViewData["Title"]</h1>
-
+@Html.DropDownList("SelectedRoom", Model, "Select a room")
 <p>PageTest message OCPP send.</p>
+
  <input type="text" id="inputValue" placeholder="send message to websocket">
         <br/>
         <br>
